@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddist_clone_app/core/constants/const.dart';
+import 'package:reddist_clone_app/features/auth/controller/auth_controller.dart';
 import 'package:reddist_clone_app/theme/pallete.dart';
 
-class SignInButtion extends StatelessWidget {
+class SignInButtion extends ConsumerWidget {
   const SignInButtion({super.key});
 
+  void signInWithGoogle(WidgetRef ref) {
+    ref.read(authControllerProvider);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ElevatedButton.icon(
@@ -15,7 +21,7 @@ class SignInButtion extends StatelessWidget {
             minimumSize: const Size(double.infinity, 45),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15))),
-        onPressed: () {},
+        onPressed: () => signInWithGoogle(ref),
         label: const Text(
           'Continue with Google',
           style: TextStyle(color: Pallete.whiteColor, fontSize: 18),

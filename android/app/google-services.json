@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "643454300941",
+    "project_id": "reddistapp",
+    "storage_bucket": "reddistapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643454300941:android:316ca42ead1ce42937f644",
+        "android_client_info": {
+          "package_name": "com.example.reddist_clone_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGyJ-C50sQ6xOvfAYOF5FRLxVlSwnVuaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

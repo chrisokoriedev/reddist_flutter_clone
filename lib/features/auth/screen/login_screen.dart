@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:reddist_clone_app/core/common/sigin_button.dart';
 import 'package:reddist_clone_app/core/constants/const.dart';
 import 'package:reddist_clone_app/theme/pallete.dart';
 
@@ -32,26 +33,10 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(AppContants.logoEmote,height: 300),
+                child: Image.asset(AppContants.logoEmote, height: 300),
               ),
               const Gap(20),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Pallete.greyColor)),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppContants.googlepath, width: 30),
-                      const Gap(10),
-                      const Text(
-                        'Continue with Google',
-                        style:
-                            TextStyle(color: Pallete.whiteColor, fontSize: 18),
-                      )
-                    ],
-                  ))
+              const SignInButtion()
             ],
           ),
         ),

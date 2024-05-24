@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 class UserModel {
@@ -5,7 +7,7 @@ class UserModel {
   final String profilePic;
   final String banner;
   final String uid;
-  final String isAuthenticated;
+  final bool isAuthenticated;
   final int karma;
   final List<String> awards;
   UserModel({
@@ -23,7 +25,7 @@ class UserModel {
     String? profilePic,
     String? banner,
     String? uid,
-    String? isAuthenticated,
+    bool? isAuthenticated,
     int? karma,
     List<String>? awards,
   }) {
@@ -56,7 +58,7 @@ class UserModel {
         profilePic: map['profilePic'] as String,
         banner: map['banner'] as String,
         uid: map['uid'] as String,
-        isAuthenticated: map['isAuthenticated'] as String,
+        isAuthenticated: map['isAuthenticated'] as bool,
         karma: map['karma'] as int,
         awards: List<String>.from(
           (map['awards'] as List<String>),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddist_clone_app/core/constants/app_strings.dart';
+import 'package:reddist_clone_app/features/auth/screen/login_screen.dart';
 import 'package:reddist_clone_app/theme/pallete.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppString.appName,
       theme: Pallete.darkModeAppTheme,
-      home: SizedBox(),
+      home: const LoginScreen(),
     );
   }
 }

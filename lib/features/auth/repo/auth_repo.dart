@@ -22,6 +22,7 @@ class AuthRepoistory {
         _googleSignIn = googleSignIn;
 
   void signInWithGoogle() async {
+    print('start');
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -29,7 +30,9 @@ class AuthRepoistory {
       final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
       await _firebaseAuth.signInWithCredential(credential);
+      print('success');
     } catch (e) {
+      print(e.toString());
       debugPrint(e.toString());
     }
   }

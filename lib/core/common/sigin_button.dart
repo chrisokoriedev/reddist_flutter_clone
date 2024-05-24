@@ -8,9 +8,9 @@ class SignInButtion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      style: ButtonStyle(
-          backgroundColor:
-              MaterialStateColor.resolveWith((states) => Pallete.greyColor)),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Pallete.greyColor,
+      ),
       onPressed: () {},
       label: const Text(
         'Continue with Google',

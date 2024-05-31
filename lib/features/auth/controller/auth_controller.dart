@@ -11,6 +11,6 @@ class AuthController {
       : _authRepoistory = authRepoistory;
 
   void signInWithGoogle() async {
-    _authRepoistory.signInWithGoogle();
+    final user = await _authRepoistory.signInWithGoogle();
   }
 }

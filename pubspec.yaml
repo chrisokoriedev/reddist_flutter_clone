@@ -18,13 +18,13 @@ dependencies:
   firebase_auth: 
   google_sign_in:
   flutter_riverpod:
-  fpdart: 
+  fpdart: ^1.1.0 
   routemaster:
   dotted_border: 
   file_picker: 
   shared_preferences:
   uuid: 
-  any_link_preview:     
+  any_link_preview: 
 
 dev_dependencies:
   flutter_test:

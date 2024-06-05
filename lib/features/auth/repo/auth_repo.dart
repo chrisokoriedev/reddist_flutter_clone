@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -12,6 +11,7 @@ import 'package:reddist_clone_app/core/faliure.dart';
 import 'package:reddist_clone_app/core/providers/firebase_provider.dart';
 import 'package:reddist_clone_app/core/typedef.dart';
 import 'package:reddist_clone_app/models/user_model.dart';
+
 
 final authRepoProvider = Provider((ref) => AuthRepoistory(
     firebaseAuth: ref.read(firebaseProvider),
@@ -41,7 +41,7 @@ class AuthRepoistory {
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
       UserCredential userCrl =
           await _firebaseAuth.signInWithCredential(credential);
-      late UserModel userModel;
+      UserModel userModel;
       if (userCrl.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
             name: userCrl.user!.displayName!,
@@ -52,6 +52,8 @@ class AuthRepoistory {
             karma: 0,
             awards: []);
         await users.doc(userCrl.user!.uid).set(userModel.toMap());
+      } else {
+        userModel = await getUserData(userCrl.user!.uid).first;
       }
       return right(userModel);
     } on SocketException catch (e) {
@@ -61,5 +63,10 @@ class AuthRepoistory {
     } catch (e) {
       return left(Faliure(message: e.toString()));
     }
+  }
+
+  Stream<UserModel> getUserData(String uid) {
+    return users.doc(_firebaseAuth.currentUser!.uid).snapshots().map(
+        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
   }
 }

@@ -6,8 +6,9 @@ import 'package:reddist_clone_app/models/user_model.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
-final authControllerProvider = Provider((ref) =>
-    AuthController(authRepoistory: ref.read(authRepoProvider), ref: ref));
+final authControllerProvider = StateNotifierProvider<AuthController, bool>(
+    (ref) =>
+        AuthController(authRepoistory: ref.watch(authRepoProvider), ref: ref));
 
 class AuthController extends StateNotifier<bool> {
   final AuthRepoistory _authRepoistory;

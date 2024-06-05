@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:reddist_clone_app/core/constants/const.dart';
 import 'package:reddist_clone_app/core/constants/firebase_constant.dart';
+import 'package:reddist_clone_app/core/faliure.dart';
 import 'package:reddist_clone_app/core/providers/firebase_provider.dart';
+import 'package:reddist_clone_app/core/typedef.dart';
 import 'package:reddist_clone_app/models/user_model.dart';
 
 final authRepoProvider = Provider((ref) => AuthRepoistory(
@@ -27,7 +32,7 @@ class AuthRepoistory {
         _googleSignIn = googleSignIn;
   CollectionReference get users =>
       FirebaseFirestore.instance.collection(FirebaseContants.usersCollection);
-  Future<UserModel> signInWithGoogle() async {
+  FutureEither<UserModel> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -48,9 +53,13 @@ class AuthRepoistory {
             awards: []);
         await users.doc(userCrl.user!.uid).set(userModel.toMap());
       }
-      return userModel;
+      return right(userModel);
+    } on SocketException catch (e) {
+      throw e.toString();
+    } on FirebaseException catch (e) {
+      throw e.toString();
     } catch (e) {
-      rethrow;
+      return left(Faliure(message: e.toString()));
     }
   }
 }

@@ -7,8 +7,8 @@ import 'package:reddist_clone_app/theme/pallete.dart';
 class SignInButtion extends ConsumerWidget {
   const SignInButtion({super.key});
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(authControllerProvider).signInWithGoogle();
+  void signInWithGoogle(BuildContext context, WidgetRef ref) {
+    ref.read(authControllerProvider).signInWithGoogle(context);
   }
 
   @override
@@ -21,7 +21,7 @@ class SignInButtion extends ConsumerWidget {
             minimumSize: const Size(double.infinity, 45),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15))),
-        onPressed: () => signInWithGoogle(ref),
+        onPressed: () => signInWithGoogle(context, ref),
         label: const Text(
           'Continue with Google',
           style: TextStyle(color: Pallete.whiteColor, fontSize: 18),
@@ -32,20 +32,3 @@ class SignInButtion extends ConsumerWidget {
   }
 }
 
-// A shared state that can be accessed by multiple widgets at the same time.
-// @riverpod
-// class Count extends _$Count {
-//   @override
-//   int build() => 0;
-
-//   void increment() => state++;
-// }
-
-// // Consumes the shared state and rebuild when it changes
-// class Title extends ConsumerWidget {
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final count = ref.watch(countProvider);
-//     return Text('$count');
-//   }
-// }

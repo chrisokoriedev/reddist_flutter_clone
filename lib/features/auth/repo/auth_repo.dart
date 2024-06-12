@@ -12,7 +12,6 @@ import 'package:reddist_clone_app/core/providers/firebase_provider.dart';
 import 'package:reddist_clone_app/core/typedef.dart';
 import 'package:reddist_clone_app/models/user_model.dart';
 
-
 final authRepoProvider = Provider((ref) => AuthRepoistory(
     firebaseAuth: ref.read(firebaseProvider),
     firebaseFirestore: ref.read(fireStoreProvider),
@@ -32,6 +31,8 @@ class AuthRepoistory {
         _googleSignIn = googleSignIn;
   CollectionReference get users =>
       FirebaseFirestore.instance.collection(FirebaseContants.usersCollection);
+  Stream<User?> get userAuthChanges => _firebaseAuth.authStateChanges();
+
   FutureEither<UserModel> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();

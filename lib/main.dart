@@ -2,9 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddist_clone_app/core/constants/app_strings.dart';
-import 'package:reddist_clone_app/features/auth/screen/login_screen.dart';
 import 'package:reddist_clone_app/theme/pallete.dart';
+import 'package:routemaster/routemaster.dart';
 
+import 'core/route/app_router.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,11 +19,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: AppString.appName,
       theme: Pallete.darkModeAppTheme,
-      home: const LoginScreen(),
+      // home: const LoginScreen(),
+      routerDelegate:
+          RoutemasterDelegate(routesBuilder: (context) => loggedOutROute),
+      routeInformationParser: const RoutemasterParser(),
     );
   }
 }

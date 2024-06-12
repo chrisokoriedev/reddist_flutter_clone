@@ -66,8 +66,8 @@ class AuthRepoistory {
     }
   }
 
-  Stream<UserModel> getUserData(String uid) {
-    return users.doc(_firebaseAuth.currentUser!.uid).snapshots().map(
-        (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
-  }
+  Stream<UserModel> getUserData(String uid) => users
+      .doc(_firebaseAuth.currentUser!.uid)
+      .snapshots()
+      .map((event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
 }

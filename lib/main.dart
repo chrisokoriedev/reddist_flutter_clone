@@ -17,20 +17,29 @@ void main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+class MainApp extends ConsumerStatefulWidget {
+  const MainApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<MainApp> {
+  @override
+  Widget build(BuildContext context) {
     return ref.watch(authStateChangesProvider).when(
         data: (data) => MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: AppString.appName,
-            theme: Pallete.darkModeAppTheme,
-            routerDelegate:
-                RoutemasterDelegate(routesBuilder: (context) => loggedOutROute),
-            routeInformationParser: const RoutemasterParser()),
-        error: (_, __) => ErrorTextWidget(errorText: _.toString()),
+              debugShowCheckedModeBanner: false,
+              title: AppString.appName,
+              theme: Pallete.darkModeAppTheme,
+              routerDelegate: RoutemasterDelegate(
+                routesBuilder: (context) =>
+                    data != null ? loggedInROute : loggedOutROute,
+              ),
+              routeInformationParser: const RoutemasterParser(),
+            ),
+        error: (_, __) =>
+            Center(child: ErrorTextWidget(errorText: _.toString())),
         loading: () => const LoaderWidget());
   }
 }

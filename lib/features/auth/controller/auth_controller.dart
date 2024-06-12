@@ -6,9 +6,15 @@ import 'package:reddist_clone_app/models/user_model.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
-final authControllerProvider = StateNotifierProvider<AuthController, bool>(
-    (ref) =>
-        AuthController(authRepoistory: ref.watch(authRepoProvider), ref: ref));
+final authControllerProvider =
+    StateNotifierProvider<AuthController, bool>((ref) => AuthController(
+          authRepoistory: ref.watch(authRepoProvider),
+          ref: ref,
+        ));
+final authStateChangesProvider = StreamProvider((ref) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController._authRepoistory.userAuthChanges;
+});
 
 class AuthController extends StateNotifier<bool> {
   final AuthRepoistory _authRepoistory;
